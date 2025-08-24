@@ -1,0 +1,129 @@
+@import url("https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+
+@import "tailwindcss";
+
+@theme {
+  /* Light Mode */
+  --color-light-background: #f5f6f5;   /* soft ivory, inspired by mosque marble */
+  --color-light-surface: #ffffff;       /* clean white surface */
+  --color-light-primary: #1a6642;       /* rich emerald green */
+  --color-light-accent: #34d399;        /* vibrant teal accent */
+  --color-light-gold: #f59e0b;         /* warm amber gold */
+  --color-light-text: #1a202c;          /* deep charcoal text */
+  --color-light-subtext: #6b7280;       /* soft gray subtext */
+  --color-light-border: #e5e7eb;        /* light gray border */
+
+  /* Dark Mode */
+  --color-dark-background: #0a1010;     /* deep night green-black */
+  --color-dark-surface: #1e2a44;        /* dark slate surface */
+  --color-dark-primary: #34d399;        /* vibrant teal for dark mode */
+  --color-dark-accent: #10b981;         /* deep emerald accent */
+  --color-dark-gold: #f59e0b;          /* warm amber gold */
+  --color-dark-text: #f1f5f9;           /* crisp white text */
+  --color-dark-subtext: #9ca3af;        /* muted gray subtext */
+  --color-dark-border: #374151;         /* dark slate border */
+}
+
+/* Apply Amiri font globally */
+html, body, * {
+  font-family: "Amiri", serif;
+}
+
+/* Enable dark mode via .dark class */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Neon glow effects */
+.neon-glow {
+  box-shadow: 0 0 10px rgba(52, 211, 153, 0.5), 0 0 20px rgba(52, 211, 153, 0.3), 0 0 30px rgba(245, 158, 11, 0.2);
+}
+
+.neon-glow-red {
+  box-shadow: 0 0 10px rgba(239, 68, 68, 0.5), 0 0 20px rgba(239, 68, 68, 0.3);
+}
+
+.neon-glow-card {
+  box-shadow: 0 0 15px rgba(52, 211, 153, 0.4), 0 0 25px rgba(245, 158, 11, 0.2);
+  transition: box-shadow 0.3s ease;
+}
+
+.neon-glow-card:hover {
+  box-shadow: 0 0 20px rgba(52, 211, 153, 0.6), 0 0 30px rgba(245, 158, 11, 0.4);
+}
+
+.neon-glow-input {
+  box-shadow: 0 0 8px rgba(52, 211, 153, 0.3);
+  transition: box-shadow 0.3s ease;
+}
+
+.neon-glow-input:focus {
+  box-shadow: 0 0 12px rgba(52, 211, 153, 0.5), 0 0 20px rgba(245, 158, 11, 0.3);
+}
+
+.neon-glow-button {
+  box-shadow: 0 0 10px rgba(52, 211, 153, 0.5), 0 0 20px rgba(245, 158, 11, 0.3);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.neon-glow-button:hover {
+  box-shadow: 0 0 15px rgba(52, 211, 153, 0.7), 0 0 25px rgba(245, 158, 11, 0.5);
+}
+
+.neon-glow-audio {
+  box-shadow: 0 0 8px rgba(52, 211, 153, 0.3);
+  transition: box-shadow 0.3s ease;
+}
+
+.neon-glow-audio::-webkit-media-controls-panel {
+  background: linear-gradient(to right, rgba(52, 211, 153, 0.2), rgba(245, 158, 11, 0.2));
+  border-radius: 8px;
+  padding: 4px;
+}
+
+.neon-glow-audio::-webkit-media-controls-play-button,
+.neon-glow-audio::-webkit-media-controls-volume-slider,
+.neon-glow-audio::-webkit-media-controls-current-time-display,
+.neon-glow-audio::-webkit-media-controls-time-remaining-display {
+  color: #1a202c;
+  filter: brightness(1.2);
+}
+
+.dark .neon-glow-audio::-webkit-media-controls-play-button,
+.dark .neon-glow-audio::-webkit-media-controls-volume-slider,
+.dark .neon-glow-audio::-webkit-media-controls-current-time-display,
+.dark .neon-glow-audio::-webkit-media-controls-time-remaining-display {
+  color: #f1f5f9;
+  filter: brightness(1.2);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(45deg, #1a6642, #34d399);
+  border-radius: 10px;
+  box-shadow: 0 0 8px rgba(52, 211, 153, 0.5);
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+
+/* Firefox scrollbar */
+.scrollbar-custom {
+  scrollbar-width: thin;
+  scrollbar-color: #34d399 rgba(255, 255, 255, 0.05);
+}
+
+/* Animation for loading text */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.animate-pulse {
+  animation: pulse 1.5s ease-in-out infinite;
+}
