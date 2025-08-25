@@ -56,8 +56,6 @@ export default function RegisterNow() {
         </motion.p>
         <motion.a
           href="/registration" 
-          target="_blank"
-          rel="noopener noreferrer"
           className="inline-block px-8 py-4 text-lg font-semibold rounded-lg bg-gradient-to-r from-light-primary to-light-accent dark:from-dark-primary dark:to-dark-accent text-white neon-glow-button font-amiri"
           variants={buttonVariants}
           initial="initial"

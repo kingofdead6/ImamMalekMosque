@@ -1,114 +1,151 @@
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
 export default function Dawra() {
-  const handleRegister = (title) => {
-    // Replace with your form/modal or navigation
-    alert(`التسجيل في: ${title}`);
-  };
+   const adhkar = [
+  "سبحان الله وبحمده",
+  "سبحان الله العظيم",
+  "لا إله إلا الله وحده لا شريك له، له الملك وله الحمد وهو على كل شيء قدير",
+  "الحمد لله رب العالمين",
+  "الله أكبر كبيرًا",
+  "أستغفر الله وأتوب إليه",
+  "لا حول ولا قوة إلا بالله",
+  "اللهم صل وسلم على نبينا محمد",
+  "رضيت بالله ربًا، وبالإسلام دينًا، وبمحمد صلى الله عليه وسلم نبيًا",
+  "اللهم اغفر لي ولوالدي ولجميع المسلمين",
+  "بسم الله الذي لا يضر مع اسمه شيء في الأرض ولا في السماء وهو السميع العليم",
+  "اللهم بك أصبحنا وبك أمسينا وبك نحيا وبك نموت وإليك النشور",
+  "اللهم بك أمسينا وبك أصبحنا وبك نحيا وبك نموت وإليك المصير",
+  "اللهم إني أسألك العافية في الدنيا والآخرة",
+  "اللهم اجعل في قلبي نورًا",
+  "اللهم أنت ربي لا إله إلا أنت خلقتني وأنا عبدك",
+  "اللهم إني ظلمت نفسي ظلمًا كثيرًا فاغفر لي",
+  "اللهم إني أعوذ بك من الهم والحزن",
+  "اللهم إني أعوذ بك من العجز والكسل",
+  "اللهم إني أعوذ بك من الجبن والبخل",
+  "اللهم إني أعوذ بك من غلبة الدين وقهر الرجال",
+  "اللهم إني أعوذ بك من فتنة النار وعذاب النار",
+  "اللهم إني أعوذ بك من فتنة القبر وعذاب القبر",
+  "اللهم اغفر للمؤمنين والمؤمنات",
+  "اللهم إني أسألك الجنة وأعوذ بك من النار",
+  "اللهم آتنا في الدنيا حسنة وفي الآخرة حسنة وقنا عذاب النار",
+  "اللهم إني أعوذ بك من شر ما عملت ومن شر ما لم أعمل",
+  "اللهم مصرف القلوب صرف قلبي على طاعتك",
+  "اللهم حبب إلينا الإيمان وزينه في قلوبنا",
+  "اللهم ارزقني حسن الخاتمة",
+  "اللهم اجعلني لك شاكرًا لك ذاكرًا",
+  "اللهم اجعل القرآن ربيع قلبي ونور صدري",
+  "اللهم اجعل لي من أمري يسرًا",
+  "اللهم اكفني بحلالك عن حرامك",
+  "اللهم ارزقني من حيث لا أحتسب",
+  "اللهم إني أعوذ بك من شر نفسي",
+  "اللهم أعني على ذكرك وشكرك وحسن عبادتك",
+  "اللهم إني أسألك علماً نافعاً",
+  "اللهم إني أسألك رزقًا طيبًا",
+  "اللهم إني أسألك عملًا متقبلاً",
+  "اللهم إني أعوذ بك من الكفر والفقر",
+  "اللهم عافني في بدني",
+  "اللهم عافني في سمعي",
+  "اللهم عافني في بصري",
+  "اللهم إني أعوذ بك من النار",
+  "اللهم قني عذابك يوم تبعث عبادك",
+  "اللهم ارحمني يوم أبعث حيًا",
+  "اللهم ثبتني بالقول الثابت",
+  "اللهم اجعلني من التوابين",
+  "اللهم اجعلني من المتطهرين",
+  "اللهم طهر قلبي من النفاق",
+  "اللهم طهر عملي من الرياء",
+  "اللهم طهر لساني من الكذب",
+  "اللهم طهر عيني من الخيانة",
+  "اللهم ارزقني قلبًا سليمًا",
+  "اللهم ارزقني لسانًا ذاكرًا",
+  "اللهم ارزقني عملًا صالحًا",
+  "اللهم اجعل آخر كلامي لا إله إلا الله",
+  "اللهم هون علينا سكرات الموت",
+  "اللهم اجعل قبري روضة من رياض الجنة",
+  "اللهم استر عوراتي وآمن روعاتي",
+  "اللهم احفظني من بين يدي ومن خلفي",
+  "اللهم احفظني عن يميني وعن شمالي",
+  "اللهم احفظني من فوقي وأعوذ بعظمتك أن أغتال من تحتي",
+  "اللهم إني أسألك العفو والعافية",
+  "اللهم اجعلني من عبادك المخلصين",
+  "اللهم اجعلني من عبادك الصالحين",
+  "اللهم اجعلني من عبادك المحسنين",
+  "اللهم اجعلني من الذين يستمعون القول فيتبعون أحسنه",
+  "اللهم اجعلني من ورثة جنة النعيم",
+  "اللهم اجعلني من المتوكلين عليك",
+  "اللهم اجعلني من الراضين بقضائك",
+  "اللهم اجعلني من الشاكرين لنعمك",
+  "اللهم اجعلني من الذاكرين لك كثيرًا",
+  "اللهم اجعلني من القانتين",
+  "اللهم اجعلني من المنيبين",
+  "اللهم اجعلني من أوليائك المتقين",
+  "اللهم اجعلني من ورثة جنة الفردوس الأعلى",
+  "اللهم اجعلني من الذين لا خوف عليهم ولا هم يحزنون",
+  "اللهم اجعلني في حرزك وأمانك",
+  "اللهم اجعلني من المستغفرين بالأسحار",
+  "اللهم اجعلني من الذين قلت فيهم: ﴿إِنَّ ٱلۡمُتَّقِینَ فِی جَنَّـٰتࣲ وَعُیُونٍ﴾",
+  "اللهم اجعلني من أهل القرآن",
+  "اللهم اجعلني من الذين يقال لهم اقرأ وارتق",
+  "اللهم اجعلني من الذين تقول لهم الملائكة سلام عليكم بما صبرتم",
+  "اللهم اجعلني من الذين لا خوف عليهم يوم القيامة",
+  "اللهم اجعلني من الذين يدخلون الجنة بلا حساب",
+  "اللهم اجعلني من الذين يظلهم الله في ظله يوم لا ظل إلا ظله",
+  "اللهم اجعلني من الذين يشربون من حوض النبي صلى الله عليه وسلم شربة لا يظمأون بعدها أبدا",
+  "اللهم اجعلني من الذين تبيض وجوههم يوم تبيض وجوه",
+  "اللهم اجعلني من الذين قلت فيهم: ﴿فَفِی رَوۡضَةࣲ یُحۡبَرُونَ﴾",
+  "اللهم اجعلني من الذين قلت فيهم: ﴿وُجُوهࣱ یَوۡمَىِٕذࣲ نَّاعِمَةࣱ * لِّسَعۡیِهَا رَاضِیَةࣱ﴾",
+  "اللهم اجعلني من الذين قلت فيهم: ﴿إِنَّ ٱلۡأَبۡرَارَ لَفِی نَعِیمࣲ﴾",
+  "اللهم اجعلني من الذين قلت فيهم: ﴿إِنَّ ٱلَّذِینَ ءَامَنُوا۟ وَعَمِلُوا۟ ٱلصَّـٰلِحَـٰتِ كَانَتۡ لَهُمۡ جَنَّـٰتُ ٱلۡفِرۡدَوۡسِ نُزُلًا﴾",
+  "اللهم اجعلني من الذين قلت فيهم: ﴿وَسِیقَ ٱلَّذِینَ ٱتَّقَوۡا۟ رَبَّهُمۡ إِلَى ٱلۡجَنَّةِ زُمَرًا﴾",
+];
 
-  const courses = [
-    { title: "دورة في التجويد", time: "كل جمعة بعد صلاة المغرب" },
-    { title: "دورة في الفقه", time: "كل سبت بعد صلاة العشاء" },
-    { title: "دورة في السيرة النبوية", time: "كل أحد بعد صلاة العصر" },
-  ];
+  const [currentDikr, setCurrentDikr] = useState(adhkar[0]);
 
-  // Framer Motion variants for animations
-  const cardVariants = {
-    initial: { y: 20, opacity: 0 },
-    animate: { y: 0, opacity: 1, transition: { duration: 0.5, ease: "easeOut" } },
-    hover: { scale: 1.03, boxShadow: "0 0 20px rgba(52, 211, 153, 0.6)" },
-  };
+  useEffect(() => {
+    const changeDikr = () => {
+      const random = Math.floor(Math.random() * adhkar.length);
+      setCurrentDikr(adhkar[random]);
+    };
 
-  const titleVariants = {
-    initial: { y: -20, opacity: 0 },
-    animate: { y: 0, opacity: 1, transition: { duration: 0.5, ease: "easeOut" } },
-  };
+    changeDikr();
+    const interval = setInterval(changeDikr, 10000);
+    return () => clearInterval(interval);
+  }, []);
 
+  // Animation for text
   const textVariants = {
-    initial: { y: 20, opacity: 0 },
-    animate: { y: 0, opacity: 1, transition: { duration: 0.5, delay: 0.2, ease: "easeOut" } },
-  };
-
-  const buttonVariants = {
-    initial: { y: 20, opacity: 0 },
-    animate: { y: 0, opacity: 1, transition: { duration: 0.5, delay: 0.3, ease: "easeOut" } },
-    hover: { scale: 1.1, boxShadow: "0 0 15px rgba(52, 211, 153, 0.8)" },
-    tap: { scale: 0.95 },
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
   };
 
   return (
     <section
-      id="dawarat"
-      className="py-20 bg-light-background dark:bg-dark-background text-light-text dark:text-dark-text transition-all duration-300"
+      id="adhkar"
+      className="relative py-20 bg-light-background dark:bg-dark-background 
+                 text-light-text dark:text-dark-text transition-all duration-300 overflow-hidden"
     >
-      <div className="max-w-6xl mx-auto px-6 text-center">
+      {/* Lantern Icon (left side) */}
+      <motion.div
+        className="absolute left-0 md:left-60 top-1/2 -translate-y-1/2 w-20 h-20 text-yellow-400"
+        animate={{ y: [0, -10, 0], opacity: [0.8, 1, 0.8] }}
+        transition={{ duration: 3, repeat: Infinity }}
+      >
+        <img src="https://res.cloudinary.com/dtwa3lxdk/image/upload/v1756113595/lentern_uv7ifp.png" alt="Lantern" className="w-full h-full object-contain" />
+        {/* Glow effect */}
+        <div className="absolute inset-0 rounded-full blur-2xl bg-yellow-300 opacity-40 animate-pulse"></div>
+      </motion.div>
+
+      <div className="relative max-w-3xl mx-auto px-6 text-center">
         <motion.h2
-          className="text-5xl font-extrabold text-light-primary dark:text-dark-primary relative inline-block mb-8"
-          variants={titleVariants}
-          initial="initial"
-          animate="animate"
-        >
-          الدورات العلمية
-          <span className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-light-accent to-light-gold dark:from-dark-accent dark:to-dark-gold rounded-full neon-glow"></span>
-        </motion.h2>
-        <motion.p
-          className="text-lg mb-12 max-w-3xl mx-auto text-light-subtext dark:text-dark-subtext"
+          className="text-4xl font-extrabold text-light-primary dark:text-dark-primary mb-8 drop-shadow-lg"
           variants={textVariants}
           initial="initial"
           animate="animate"
+          key={currentDikr}
         >
-          تعرف على الدورات التعليمية المتاحة في المسجد وقم بالتسجيل.
-        </motion.p>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {courses.map((c) => (
-            <motion.div
-              key={c.title}
-              className="relative p-6 rounded-2xl bg-light-surface dark:bg-dark-surface shadow-xl neon-glow-card text-start"
-              variants={cardVariants}
-              initial="initial"
-              animate="animate"
-              whileHover="hover"
-            >
-              <div className="flex items-center gap-3 mb-4">
-                <svg
-                  className="w-6 h-6 text-light-gold dark:text-dark-gold"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M21 12a9 9 0 11-6.22-8.66M12 3v3m0 12v3m9-9h-3m-12 0H3"
-                  />
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4z"
-                  />
-                </svg>
-                <h3 className="font-bold text-xl text-light-primary dark:text-dark-primary">
-                  {c.title}
-                </h3>
-              </div>
-              <p className="mb-4 text-light-subtext dark:text-dark-subtext">{c.time}</p>
-              <motion.button
-                onClick={() => handleRegister(c.title)}
-                className="px-6 py-3 bg-gradient-to-r from-light-primary to-light-accent dark:from-dark-primary dark:to-dark-accent text-white rounded-lg font-semibold neon-glow-button"
-                variants={buttonVariants}
-                initial="initial"
-                animate="animate"
-                whileHover="hover"
-                whileTap="tap"
-              >
-                التسجيل
-              </motion.button>
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-light-accent/10 to-light-gold/10 dark:from-dark-accent/10 dark:to-dark-gold/10 pointer-events-none"></div>
-            </motion.div>
-          ))}
-        </div>
+          {currentDikr}
+        </motion.h2>
       </div>
     </section>
   );

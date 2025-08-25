@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 const METHOD = 2; // Calculation method
 const DEFAULT_LOCATION = { lat: 36.7538, lon: 3.0588 }; // Algiers coordinates
@@ -22,7 +23,6 @@ export default function Mawaqit() {
       async (pos) => {
         const { latitude, longitude } = pos.coords;
         setLocation({ lat: latitude, lon: longitude });
-        // Reverse geocoding to get city name
         try {
           const response = await fetch(
             `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`
@@ -59,19 +59,32 @@ export default function Mawaqit() {
   }, [location]);
 
   const prayers = [
-  { key: "Fajr", label: "الفجر", image: "https://res.cloudinary.com/dtwa3lxdk/image/upload/v1755975852/sunrise_jveebm.png" },
-  { key: "Dhuhr", label: "الظهر", image: "https://res.cloudinary.com/dtwa3lxdk/image/upload/v1755976028/sun_2_xsubuj.png" },
-  { key: "Asr", label: "العصر", image: "https://res.cloudinary.com/dtwa3lxdk/image/upload/v1755976027/sun_1_teiwgc.png" },
-  { key: "Maghrib", label: "المغرب", image: "https://res.cloudinary.com/dtwa3lxdk/image/upload/v1755976030/sunsets_lsxkle.png" },
-  { key: "Isha", label: "العشاء", image: "https://res.cloudinary.com/dtwa3lxdk/image/upload/v1755976031/moon_poczdh.png" },
-];
-
+    { key: "Fajr", label: "الفجر", image: "https://res.cloudinary.com/dtwa3lxdk/image/upload/v1755975852/sunrise_jveebm.png" },
+    { key: "Dhuhr", label: "الظهر", image: "https://res.cloudinary.com/dtwa3lxdk/image/upload/v1755976028/sun_2_xsubuj.png" },
+    { key: "Asr", label: "العصر", image: "https://res.cloudinary.com/dtwa3lxdk/image/upload/v1755976027/sun_1_teiwgc.png" },
+    { key: "Maghrib", label: "المغرب", image: "https://res.cloudinary.com/dtwa3lxdk/image/upload/v1755976030/sunsets_lsxkle.png" },
+    { key: "Isha", label: "العشاء", image: "https://res.cloudinary.com/dtwa3lxdk/image/upload/v1755976031/moon_poczdh.png" },
+  ];
 
   return (
     <section
       id="mawaqit"
-      className="py-20 bg-light-background dark:bg-dark-background text-light-text dark:text-dark-text transition-all duration-300"
+      className="py-20 bg-light-background dark:bg-dark-background text-light-text dark:text-dark-text transition-all duration-300 relative overflow-hidden"
     >
+      {/* Decorative Crescent Icon (left side) */}
+      <motion.div
+        className="z-1 absolute right-0 md:right-60 top-1/2 -translate-y-1/2 w-20 h-20 text-blue-400"
+        animate={{ y: [0, -10, 0], opacity: [0.8, 1, 0.8] }}
+        transition={{ duration: 3, repeat: Infinity }}
+      >
+        <img
+          src="https://res.cloudinary.com/dtwa3lxdk/image/upload/v1756113594/half-moon_olbgom.png"
+          alt="Crescent"
+          className="w-full h-full object-contain"
+        />
+        <div className="absolute inset-0 rounded-full blur-2xl bg-blue-300 opacity-40 animate-pulse"></div>
+      </motion.div>
+
       <div className="max-w-6xl mx-auto px-6">
         {/* Section Title */}
         <div className="text-center mb-12">
@@ -133,46 +146,44 @@ export default function Mawaqit() {
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-6">
               {prayers.map((p) => (
                 <div
-  key={p.key}
-  className="relative p-6 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 neon-glow-card overflow-hidden"
->
-  {/* Dynamic background image */}
-  <div
-    className="absolute inset-0 rounded-2xl bg-cover bg-center opacity-50 pointer-events-none"
-    style={{ backgroundImage: `url(${p.image})` }}
-  ></div>
+                  key={p.key}
+                  className="relative p-6 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 neon-glow-card overflow-hidden"
+                >
+                  <div
+                    className="absolute inset-0 rounded-2xl bg-cover bg-center opacity-50 pointer-events-none"
+                    style={{ backgroundImage: `url(${p.image})` }}
+                  ></div>
 
-  <div className="relative flex flex-col">
-    <div className="flex items-center gap-3 mb-3">
-      <svg
-        className="w-5 h-5 text-light-gold dark:text-dark-gold"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
-          d="M21 12a9 9 0 11-6.22-8.66M12 3v3m0 12v3m9-9h-3m-12 0H3"
-        />
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
-          d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4z"
-        />
-      </svg>
-      <h3 className="font-bold text-xl text-light-primary dark:text-dark-primary">
-        {p.label}
-      </h3>
-    </div>
-    <p className="text-2xl font-mono text-light-text dark:text-dark-text">
-      {data.timings[p.key]}
-    </p>
-  </div>
-</div>
-
+                  <div className="relative flex flex-col">
+                    <div className="flex items-center gap-3 mb-3">
+                      <svg
+                        className="w-5 h-5 text-light-gold dark:text-dark-gold"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M21 12a9 9 0 11-6.22-8.66M12 3v3m0 12v3m9-9h-3m-12 0H3"
+                        />
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4z"
+                        />
+                      </svg>
+                      <h3 className="font-bold text-xl text-light-primary dark:text-dark-primary">
+                        {p.label}
+                      </h3>
+                    </div>
+                    <p className="text-2xl font-mono text-light-text dark:text-dark-text">
+                      {data.timings[p.key]}
+                    </p>
+                  </div>
+                </div>
               ))}
             </div>
           </>
